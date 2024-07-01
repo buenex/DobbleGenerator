@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Dobble Generator
+        </title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <label>Number of objects per card : </label><input type="number" min="1" max="1000000" id="objects-per-card"><br>
+        <label>Lista de imagens : </label><textarea type="text" id="images-input" placeholder="Escreva os nomes das imagens separado por virgula, por exemplo (banana,laranja,pera,macarrao)" rows="5", cols="50"></textarea><br>
+        <input type="button" value="Generate!" onClick="generateCards()"><br>
+        Imagens na lista:<label id="images-on-list"></label>
+        <br><br>
+        <h1>Output:</h1><br><br>
+        Objects per card:<b id="objects-per-card-output"></b><br>
+        Number of cards created:<b id="card-quantity"></b><br>
+        Cards:<b id="card-quantity"></b><br>
+        <div id="list-of-cards-output"></div>
+    </body>
+    <footer>
+        <script src="script.js"></script>
+    </footer>
+</html>
