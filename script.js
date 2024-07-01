@@ -17,8 +17,8 @@ imagesInput.addEventListener("input",(event)=>{
   imagesOnList.innerHTML = imagesList.length;
 });
 function generateCards() {
-    var n = parseInt(objectsPerCardInput.value) - 1;
-    var cardQuantity = (n * n) + n + 1;
+    var n = parseInt(objectsPerCardInput.value)-1;
+    var cardQuantity = (n * n) + n - 1;
     let imagesList = imagesInput.value.split(",")
 
     if (imagesList.length <= cardQuantity) {
@@ -33,12 +33,12 @@ function generateCards() {
     const cards = [];
 
     // Add the first set of n+1 cards (e.g., 8 cards)
-    for (let i = 0; i <= n; i++) {
+    for (let i = 0; i < n; i++) {
       // Add a new card with the first symbol
-      cards.push([1]);
+      cards.push([0]);
       // Add n+1 symbols on the card (e.g., 8 symbols)
       for (let j = 0; j < n; j++) {
-        cards[i].push((j + 1) + (i * n) + 1);
+        cards[i].push((j + 1) + (i * n) );
       }
     }
 
@@ -46,10 +46,10 @@ function generateCards() {
     for (let i = 0; i < n; i++) {
       for (let j = 0; j < n; j++) {
         // Append a new card with 1 symbol
-        cards.push([i + 2]);
+        cards.push([i + 1]);
         // Add n symbols on the card (e.g., 7 symbols)
         for (let k = 0; k < n; k++) {
-          const val = (n + 1 + n * k + (i * k + j) % n) + 1;
+          const val = (n + 1 + n * k + (i * k + j) % n);
           cards[cards.length - 1].push(val);
         }
       }
@@ -62,17 +62,35 @@ function generateCards() {
       }
     }
 
+    shuffle(cards);
+
     // Output all cards
     let i = 0;
     listOfCardsOutput.innerHTML = "";
     for (const card of cards) {
-      i++;
       let line = `${i} - [`;
       for (const number of card) {
         line = `${line}${imagesList[number]},`;
       }
-      line = line.slice(0, -2) + "]";
+      line = line.slice(0, -1) + "]";
       listOfCardsOutput.innerHTML += "<b>" + line + "</b><br>"
+      i++;
     }
+  }
+}
+
+function shuffle(array) {
+  let currentIndex = array.length;
+
+  // While there remain elements to shuffle...
+  while (currentIndex != 0) {
+
+    // Pick a remaining element...
+    let randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
   }
 }
